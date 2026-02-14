@@ -90,17 +90,17 @@ const calculatorCategories: CalculatorCategory[] = [
 
 const Features = () => {
   return (
-    <section id="features" className="py-20 px-4 bg-base-200 relative">
+    <section id="features" className="py-20 px-4 bg-base-200/70 relative">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-base-content">
             📐 Core Calculation Suite
           </h2>
-          <p className="text-xl md:text-2xl max-w-4xl mx-auto text-secondary mb-3">
+          <p className="text-xl md:text-2xl max-w-4xl mx-auto text-[#afbbc8] mb-3">
             Every Critical UT & Pipeline Calculation in One Professional Toolkit
           </p>
-          <p className="text-lg max-w-3xl mx-auto text-secondary/80">
+          <p className="text-lg max-w-3xl mx-auto text-[#afbbc8]">
             Built specifically for ultrasonic technicians and pipeline integrity crews, this suite covers real-world inspection math — from beam geometry to corrosion evaluation — without spreadsheets or manual trig.
           </p>
         </div>
@@ -110,7 +110,7 @@ const Features = () => {
           {calculatorCategories.map((category, categoryIndex) => (
             <div 
               key={categoryIndex}
-              className={`glass-card rounded-xl overflow-hidden border-l-4 ${category.color}`}
+              className={`glass-card rounded-xl overflow-hidden border-2 border-[#5821d3] ${category.color}`}
             >
               {/* Category Header */}
               <div className="p-6 border-b border-base-300">
@@ -120,35 +120,60 @@ const Features = () => {
                     <h3 className="text-2xl font-bold text-base-content">
                       {category.category}
                     </h3>
-                    <p className="text-secondary text-sm mt-1">{category.tagline}</p>
+                    <p className="text-[#eef9ff] text-sm mt-1">{category.tagline}</p>
                   </div>
                 </div>
               </div>
 
-              {/* Calculators Table */}
-              <div className="overflow-x-auto">
-                <table className="table">
-                  <tbody>
-                    {category.calculators.map((calc, calcIndex) => (
-                      <tr 
-                        key={calcIndex} 
-                        className={`${calcIndex % 2 === 0 ? 'bg-base-100' : 'bg-base-200/50'} hover:bg-base-300/50 transition-colors`}
-                      >
-                        <td className="w-12">
+              {/* Calculators List */}
+              <div className="overflow-hidden">
+                {category.calculators.slice(0, 2).map((calc, calcIndex) => (
+                  <div
+                    key={calcIndex}
+                    className={`flex gap-4 border-b border-base-300 px-6 py-5 ${
+                      calcIndex % 2 === 0 ? 'bg-[#28373f]' : 'bg-base-200/60'
+                    } hover:bg-base-300/40 transition-colors`}
+                  >
+                    <span className="text-2xl">{calc.icon}</span>
+                    <div>
+                      <div className="font-semibold text-base-content text-lg">
+                        {calc.name}
+                      </div>
+                      <div className="text-sm text-white mt-1">
+                        {calc.description}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+                {category.calculators.length > 2 && (
+                  <div className="collapse collapse-arrow border-t border-base-300 bg-base-200/50">
+                    <input type="checkbox" />
+                    <div className="collapse-title text-sm font-semibold text-base-content px-6 py-4">
+                      Show {category.calculators.length - 2} more tools
+                    </div>
+                    <div className="collapse-content px-0 pb-4">
+                      {category.calculators.slice(2).map((calc, calcIndex) => (
+                        <div
+                          key={calcIndex}
+                          className={`flex gap-4 border-t border-base-300 px-6 py-5 ${
+                            calcIndex % 2 === 0 ? 'bg-[#28373f]' : 'bg-base-200/60'
+                          }`}
+                        >
                           <span className="text-2xl">{calc.icon}</span>
-                        </td>
-                        <td>
-                          <div className="font-semibold text-base-content text-base">
-                            {calc.name}
+                          <div>
+                            <div className="font-semibold text-base-content text-lg">
+                              {calc.name}
+                            </div>
+                            <div className="text-sm text-white mt-1">
+                              {calc.description}
+                            </div>
                           </div>
-                          <div className="text-sm text-secondary mt-1">
-                            {calc.description}
-                          </div>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           ))}
@@ -164,42 +189,42 @@ const Features = () => {
               <span className="text-2xl">✅</span>
               <div>
                 <h4 className="font-bold text-base-content">Eliminate spreadsheet dependency</h4>
-                <p className="text-secondary text-sm">No more Excel files or manual formulas</p>
+                <p className="text-[#eef9ff] text-sm">No more Excel files or manual formulas</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <span className="text-2xl">✅</span>
               <div>
                 <h4 className="font-bold text-base-content">Reduce manual calculation errors</h4>
-                <p className="text-secondary text-sm">Automated, field-tested calculations</p>
+                <p className="text-[#eef9ff] text-sm">Automated, field-tested calculations</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <span className="text-2xl">✅</span>
               <div>
                 <h4 className="font-bold text-base-content">Perform critical UT math in seconds</h4>
-                <p className="text-secondary text-sm">Instant results, no manual trig</p>
+                <p className="text-[#eef9ff] text-sm">Instant results, no manual trig</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <span className="text-2xl">✅</span>
               <div>
                 <h4 className="font-bold text-base-content">Designed for Level II & III technicians</h4>
-                <p className="text-secondary text-sm">Professional-grade tools</p>
+                <p className="text-[#eef9ff] text-sm">Professional-grade tools</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <span className="text-2xl">✅</span>
               <div>
                 <h4 className="font-bold text-base-content">Built specifically for pipeline inspections</h4>
-                <p className="text-secondary text-sm">Industry-focused solutions</p>
+                <p className="text-[#eef9ff] text-sm">Industry-focused solutions</p>
               </div>
             </div>
             <div className="flex items-start gap-3">
               <span className="text-2xl">✅</span>
               <div>
                 <h4 className="font-bold text-base-content">Works offline in the field</h4>
-                <p className="text-secondary text-sm">No internet required</p>
+                <p className="text-[#eef9ff] text-sm">No internet required</p>
               </div>
             </div>
           </div>
@@ -208,7 +233,7 @@ const Features = () => {
             <p className="text-xl md:text-2xl font-bold text-base-content mb-2">
               This isn't generic engineering software.
             </p>
-            <p className="text-lg text-secondary">
+            <p className="text-lg text-[#20d390]">
               It's the actual math you perform in the field — organized, optimized, and ready when you need it.
             </p>
           </div>
@@ -218,7 +243,7 @@ const Features = () => {
               href="https://app.ndt-toolkit.com/#/signup"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-primary btn-lg btn-glow min-w-[220px]"
+              className="inline-flex min-w-[220px] items-center justify-center rounded-full border border-[#4e26d4]/70 bg-[#4e26d4]/20 px-6 py-3 text-base font-semibold text-white transition hover:bg-[#4e26d4]/30"
             >
               Get Started Free
             </a>
@@ -226,7 +251,7 @@ const Features = () => {
               href="https://app.ndt-toolkit.com/#/login"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-outline-primary btn-lg min-w-[220px]"
+              className="inline-flex min-w-[220px] items-center justify-center rounded-full border border-[#28b9fe]/70 bg-[#28b9fe]/10 px-6 py-3 text-base font-semibold text-[#28b9fe] transition hover:bg-[#28b9fe]/20 hover:text-[#b9e7ff]"
             >
               View Live Demo
             </a>

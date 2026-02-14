@@ -8,7 +8,7 @@ const Hero = () => {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-warning opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-warning"></span>
           </span>
-          <span className="text-sm font-medium text-base-content">Now available for iOS, Android & Web</span>
+          <span className="text-sm font-medium text-base-content">Coming Soon for iOS & Android</span>
         </div>
 
         {/* Main Headline */}
@@ -16,7 +16,7 @@ const Hero = () => {
           <span className="block text-primary">
             The Field-Ready NDT Toolkit
           </span>
-          <span className="block text-base-content mt-2">
+          <span className="block text-base-content mt-2 text-3xl sm:text-4xl md:text-5xl font-bold">
             Built for Pipeline Inspectors
           </span>
         </h1>
@@ -37,7 +37,7 @@ const Hero = () => {
             href="https://app.ndt-toolkit.com/#/signup"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn btn-primary btn-lg btn-glow min-w-[220px]"
+            className="inline-flex min-w-[220px] items-center justify-center gap-2 rounded-full border border-[#4e26d4]/70 bg-[#4e26d4]/20 px-6 py-3 text-base font-semibold text-white transition hover:bg-[#4e26d4]/30"
           >
             Launch the Toolkit
             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -46,7 +46,7 @@ const Hero = () => {
           </a>
           <a
             href="#features"
-            className="btn-outline-primary btn-lg min-w-[220px]"
+            className="inline-flex min-w-[220px] items-center justify-center rounded-full border border-[#28b9fe]/70 bg-[#28b9fe]/10 px-6 py-3 text-base font-semibold text-[#28b9fe] transition hover:bg-[#28b9fe]/20 hover:text-[#b9e7ff]"
           >
             View Tool Categories
           </a>
