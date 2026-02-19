@@ -1,6 +1,9 @@
+import { useState } from 'react';
+
 interface Calculator {
   name: string;
   description: string;
+  microDescription: string;
   icon: string;
 }
 
@@ -17,166 +20,207 @@ const calculatorCategories: CalculatorCategory[] = [
     category: 'Beam Geometry & Ultrasonic Math',
     tagline: 'Essential UT beam calculations',
     icon: '🔊',
-    color: 'bg-purple-900/30 border-purple-500',
+    color: 'from-purple-500/10 to-purple-900/5',
     calculators: [
-      { name: 'Trigonometric Beam Path Calculator', description: 'Calculate shear-wave beam paths using right-triangle trigonometry', icon: '📐' },
-      { name: 'Beam Divergence Calculator', description: 'Determine beam spread and divergence angle', icon: '📡' },
-      { name: 'Beam Index Offset Calculator', description: 'Calculate probe index offsets for improved positioning', icon: '📏' },
-      { name: 'Beam Plot Math', description: 'Visualize and compute beam path geometry', icon: '📊' },
-      { name: 'Sound Path Length Calculator', description: 'Calculate true sound path length through material', icon: '📉' },
-      { name: 'Surface Distance / Depth Converter', description: 'Convert between surface distance and true depth', icon: '🔄' },
-      { name: 'Skip Distance Calculator', description: 'Calculate surface distance for multiple legs', icon: '↔️' }
+      { name: 'Trigonometric Beam Path', description: 'Calculate shear-wave beam paths using right-triangle trigonometry', microDescription: 'Shear wave geometry', icon: '📐' },
+      { name: 'Beam Divergence', description: 'Determine beam spread and divergence angle', microDescription: 'Beam spread angles', icon: '📡' },
+      { name: 'Beam Index Offset', description: 'Calculate probe index offsets for improved positioning', microDescription: 'Probe positioning offsets', icon: '📏' },
+      { name: 'Beam Plot Math', description: 'Visualize and compute beam path geometry', microDescription: 'Path geometry visualization', icon: '📊' },
+      { name: 'Sound Path Length', description: 'Calculate true sound path length through material', microDescription: 'Material path distance', icon: '📉' },
+      { name: 'Surface Distance / Depth', description: 'Convert between surface distance and true depth', microDescription: 'Depth conversions', icon: '🔄' },
+      { name: 'Skip Distance', description: 'Calculate surface distance for multiple legs', microDescription: 'Multi-leg calculations', icon: '↔️' }
     ]
   },
   {
     category: 'Snell\'s Law & Angle Calculations',
     tagline: 'Wave refraction and mode analysis',
     icon: '📏',
-    color: 'bg-teal-900/30 border-teal-500',
+    color: 'from-teal-500/10 to-teal-900/5',
     calculators: [
-      { name: 'Snell\'s Law Calculator', description: 'Calculate refracted angles across material boundaries', icon: '∠' },
-      { name: 'Critical Angle Calculator', description: 'Determine first and second critical angles', icon: '🎯' },
-      { name: 'Mode Conversion Calculator', description: 'Calculate longitudinal-to-shear wave conversions', icon: '🔀' }
+      { name: 'Snell\'s Law', description: 'Calculate refracted angles across material boundaries', microDescription: 'Material refraction angles', icon: '∠' },
+      { name: 'Critical Angle', description: 'Determine first and second critical angles', microDescription: 'Critical angle thresholds', icon: '🎯' },
+      { name: 'Mode Conversion', description: 'Calculate longitudinal-to-shear wave conversions', microDescription: 'Wave type conversions', icon: '🔀' }
     ]
   },
   {
-    category: 'Phased Array & Advanced UT Tools',
+    category: 'Phased Array & Advanced UT',
     tagline: 'PA focal laws and element control',
     icon: '📡',
-    color: 'bg-blue-900/30 border-blue-500',
+    color: 'from-blue-500/10 to-blue-900/5',
     calculators: [
-      { name: 'Active Aperture Calculator', description: 'Determine effective aperture size for phased array', icon: '⚡' },
-      { name: 'Resolution vs Aperture Math', description: 'How aperture size affects defect detectability', icon: '🔬' },
-      { name: 'Dynamic Near Field Calculator', description: 'Calculate near field length for probe selection', icon: '📍' },
-      { name: 'Element Time Delay Calculator', description: 'Generate precise element delay timing', icon: '⏱️' },
-      { name: 'Wedge Delay Time Calculator', description: 'Calculate wedge delay timing for calibration', icon: '⌚' },
-      { name: 'Sweep Simulator Math', description: 'Model and simulate sweep behavior', icon: '🌊' }
-    ]
-  },
-  {
-    category: 'Velocity, Time & Measurement Tools',
-    tagline: 'TOF and measurement calculations',
-    icon: '🧮',
-    color: 'bg-green-900/30 border-green-500',
-    calculators: [
-      { name: 'Time-of-Flight (TOF) Calculator', description: 'Calculate ultrasonic travel time using sound path', icon: '⏰' },
-      { name: 'Beam Divergence & Index Tools', description: 'Fine-tune inspection geometry and positioning', icon: '🎚️' }
+      { name: 'Active Aperture', description: 'Determine effective aperture size for phased array', microDescription: 'Array aperture sizing', icon: '⚡' },
+      { name: 'Resolution vs Aperture', description: 'How aperture size affects defect detectability', microDescription: 'Detectability analysis', icon: '🔬' },
+      { name: 'Dynamic Near Field', description: 'Calculate near field length for probe selection', microDescription: 'Near field zones', icon: '📍' },
+      { name: 'Element Time Delay', description: 'Generate precise element delay timing', microDescription: 'Element delay timing', icon: '⏱️' },
+      { name: 'Wedge Delay Time', description: 'Calculate wedge delay timing for calibration', microDescription: 'Calibration delays', icon: '⌚' },
+      { name: 'Sweep Simulator', description: 'Model and simulate sweep behavior', microDescription: 'Sweep behavior models', icon: '🌊' }
     ]
   },
   {
     category: 'Pipeline Integrity Calculations',
-    tagline: 'Corrosion, dents, and remaining strength',
+    tagline: 'Corrosion assessment & code compliance',
     icon: '🛢',
-    color: 'bg-orange-900/30 border-orange-500',
+    color: 'from-orange-500/10 to-orange-900/5',
     calculators: [
-      { name: 'Dent Ovality Calculator', description: 'Calculate dent ovality and deformation severity', icon: '⚠️' },
-      { name: 'Pit Depth Calculator', description: 'Measure corrosion pit depth and remaining wall', icon: '🕳️' },
-      { name: 'Depth Percentages Calculator', description: 'Calculate wall loss percentages from measured depth', icon: '📊' },
-      { name: 'ABS + ES Calculator', description: 'Calculate ABS and ES values for defect evaluation', icon: '🧮' },
-      { name: 'SOC / EOC Calculator', description: 'Start of Corrosion and End of Corrosion metrics', icon: '📍' },
-      { name: 'B31G Calculator', description: 'Remaining strength calculations for corroded pipe', icon: '💪' }
+      { name: 'Dent Ovality', description: 'Calculate dent ovality and deformation severity', microDescription: 'Deformation severity metrics', icon: '⚠️' },
+      { name: 'Pit Depth', description: 'Measure corrosion pit depth and remaining wall', microDescription: 'Corrosion depth analysis', icon: '🕳️' },
+      { name: 'Depth Percentages', description: 'Calculate wall loss percentages from measured depth', microDescription: 'Wall loss calculations', icon: '📊' },
+      { name: 'ABS + ES Calculator', description: 'Calculate ABS and ES values for defect evaluation', microDescription: 'Defect evaluation values', icon: '🧮' },
+      { name: 'SOC / EOC', description: 'Start of Corrosion and End of Corrosion metrics', microDescription: 'Corrosion location metrics', icon: '📍' },
+      { name: 'B31G Calculator', description: 'Remaining strength calculations for corroded pipe', microDescription: 'Remaining strength per B31G', icon: '💪' }
+    ]
+  },
+  {
+    category: 'Velocity & Measurement Tools',
+    tagline: 'TOF and precision measurements',
+    icon: '🧮',
+    color: 'from-green-500/10 to-green-900/5',
+    calculators: [
+      { name: 'Time-of-Flight (TOF)', description: 'Calculate ultrasonic travel time using sound path', microDescription: 'Travel time calculations', icon: '⏰' },
+      { name: 'Beam Divergence & Index', description: 'Fine-tune inspection geometry and positioning', microDescription: 'Geometry fine-tuning', icon: '🎚️' }
     ]
   },
   {
     category: 'Field Productivity Tools',
     tagline: 'Time tracking and crew management',
     icon: '⏱',
-    color: 'bg-yellow-900/30 border-yellow-500',
+    color: 'from-yellow-500/10 to-yellow-900/5',
     calculators: [
-      { name: 'Time Clock Calculator', description: 'Track and calculate work hours in the field', icon: '🕐' }
+      { name: 'Time Clock', description: 'Track and calculate work hours in the field', microDescription: 'Work hour tracking', icon: '🕐' }
     ]
   }
 ];
 
 const Features = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [expandedCategories, setExpandedCategories] = useState<Set<number>>(new Set());
+
+  const toggleCategory = (index: number) => {
+    const newExpanded = new Set(expandedCategories);
+    if (newExpanded.has(index)) {
+      newExpanded.delete(index);
+    } else {
+      newExpanded.add(index);
+    }
+    setExpandedCategories(newExpanded);
+  };
+
+  const filteredCategories = calculatorCategories.map(category => ({
+    ...category,
+    calculators: category.calculators.filter(calc =>
+      searchQuery === '' ||
+      calc.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      calc.description.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+  })).filter(category => category.calculators.length > 0);
+
   return (
     <section id="features" className="py-20 px-4 bg-base-200/70 relative">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-base-content">
-            📐 Core Calculation Suite
+            Core Calculation Suite
           </h2>
           <p className="text-xl md:text-2xl max-w-4xl mx-auto text-[#afbbc8] mb-3">
-            Every Critical UT & Pipeline Calculation in One Professional Toolkit
+            Professional UT & Pipeline Calculations — Fast, Offline, Field-Ready
           </p>
-          <p className="text-lg max-w-3xl mx-auto text-[#afbbc8]">
-            Built specifically for ultrasonic technicians and pipeline integrity crews, this suite covers real-world inspection math — from beam geometry to corrosion evaluation — without spreadsheets or manual trig.
+          <p className="text-base max-w-3xl mx-auto text-[#afbbc8]/90">
+            Built for ultrasonic technicians and integrity crews. Instantly access beam math, code references, and inspection calculators without spreadsheets.
           </p>
         </div>
 
-        {/* Calculator Categories */}
-        <div className="space-y-8">
-          {calculatorCategories.map((category, categoryIndex) => (
-            <div 
-              key={categoryIndex}
-              className={`glass-card rounded-xl overflow-hidden border-2 border-[#5821d3] ${category.color}`}
-            >
-              {/* Category Header */}
-              <div className="p-6 border-b border-base-300">
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="text-4xl">{category.icon}</span>
-                  <div>
-                    <h3 className="text-2xl font-bold text-base-content">
-                      {category.category}
-                    </h3>
-                    <p className="text-[#eef9ff] text-sm mt-1">{category.tagline}</p>
+        {/* Search Bar */}
+        <div className="max-w-2xl mx-auto mb-12">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search calculators (beam path, B31G, Snell's law…)"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full px-6 py-4 bg-base-100/50 backdrop-blur-sm border border-[#5821d3]/30 rounded-xl text-base-content placeholder-[#afbbc8]/60 focus:outline-none focus:border-[#5821d3] focus:ring-2 focus:ring-[#5821d3]/20 transition-all"
+            />
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 text-[#afbbc8]/40">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        {/* Category Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          {filteredCategories.map((category, categoryIndex) => {
+            const isExpanded = expandedCategories.has(categoryIndex);
+            const displayCalculators = isExpanded ? category.calculators : category.calculators.slice(0, 4);
+            const hasMore = category.calculators.length > 4;
+
+            return (
+              <div
+                key={categoryIndex}
+                className={`glass-card rounded-xl border border-[#5821d3]/20 bg-gradient-to-br ${category.color} backdrop-blur-sm overflow-hidden group hover:border-[#5821d3]/40 hover:shadow-lg hover:shadow-[#5821d3]/10 transition-all duration-300`}
+              >
+                {/* Category Header */}
+                <div className="p-6 border-b border-base-300/30">
+                  <div className="flex items-start gap-3 mb-2">
+                    <span className="text-3xl">{category.icon}</span>
+                    <div className="flex-1">
+                      <h3 className="text-xl font-bold text-base-content mb-1 leading-tight">
+                        {category.category}
+                      </h3>
+                      <p className="text-[#afbbc8] text-sm">{category.tagline}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Calculators List */}
-              <div className="overflow-hidden">
-                {category.calculators.slice(0, 2).map((calc, calcIndex) => (
-                  <div
-                    key={calcIndex}
-                    className={`flex gap-4 border-b border-base-300 px-6 py-5 ${
-                      calcIndex % 2 === 0 ? 'bg-[#28373f]' : 'bg-base-200/60'
-                    } hover:bg-base-300/40 transition-colors`}
-                  >
-                    <span className="text-2xl">{calc.icon}</span>
-                    <div>
-                      <div className="font-semibold text-base-content text-lg">
-                        {calc.name}
-                      </div>
-                      <div className="text-sm text-white mt-1">
-                        {calc.description}
-                      </div>
-                    </div>
-                  </div>
-                ))}
-
-                {category.calculators.length > 2 && (
-                  <div className="collapse collapse-arrow border-t border-base-300 bg-base-200/50">
-                    <input type="checkbox" />
-                    <div className="collapse-title text-sm font-semibold text-base-content px-6 py-4">
-                      Show {category.calculators.length - 2} more tools
-                    </div>
-                    <div className="collapse-content px-0 pb-4">
-                      {category.calculators.slice(2).map((calc, calcIndex) => (
-                        <div
-                          key={calcIndex}
-                          className={`flex gap-4 border-t border-base-300 px-6 py-5 ${
-                            calcIndex % 2 === 0 ? 'bg-[#28373f]' : 'bg-base-200/60'
-                          }`}
-                        >
-                          <span className="text-2xl">{calc.icon}</span>
-                          <div>
-                            <div className="font-semibold text-base-content text-lg">
-                              {calc.name}
-                            </div>
-                            <div className="text-sm text-white mt-1">
-                              {calc.description}
-                            </div>
-                          </div>
+                {/* Tool List */}
+                <div className="p-4 space-y-1">
+                  {displayCalculators.map((calc, calcIndex) => (
+                    <div
+                      key={calcIndex}
+                      className="flex items-start gap-3 p-3 rounded-lg hover:bg-base-100/30 transition-colors cursor-pointer group/item"
+                    >
+                      <span className="text-lg mt-0.5 flex-shrink-0">{calc.icon}</span>
+                      <div className="flex-1 min-w-0">
+                        <div className="font-semibold text-base-content text-sm leading-tight group-hover/item:text-[#20d390] transition-colors">
+                          {calc.name}
                         </div>
-                      ))}
+                        <div className="text-xs text-[#afbbc8]/70 mt-0.5 leading-snug">
+                          {calc.microDescription}
+                        </div>
+                      </div>
                     </div>
+                  ))}
+                </div>
+
+                {/* View All Link */}
+                {hasMore && (
+                  <div className="px-4 pb-4">
+                    <button
+                      onClick={() => toggleCategory(categoryIndex)}
+                      className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg border border-[#5821d3]/20 hover:border-[#5821d3]/40 hover:bg-base-100/20 text-sm font-medium text-[#afbbc8] hover:text-base-content transition-all"
+                    >
+                      {isExpanded ? (
+                        <>
+                          Show less
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                          </svg>
+                        </>
+                      ) : (
+                        <>
+                          View all {category.calculators.length} tools
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </>
+                      )}
+                    </button>
                   </div>
                 )}
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Why This Matters Section */}
