@@ -130,23 +130,7 @@ const Features = () => {
           </p>
         </div>
 
-        {/* Search Bar */}
-        <div className="max-w-2xl mx-auto mb-12">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Search calculators (beam path, B31G, Snell's law…)"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-6 py-4 bg-base-100/50 backdrop-blur-sm border border-[#5821d3]/30 rounded-xl text-base-content placeholder-[#afbbc8]/60 focus:outline-none focus:border-[#5821d3] focus:ring-2 focus:ring-[#5821d3]/20 transition-all"
-            />
-            <div className="absolute right-4 top-1/2 -translate-y-1/2 text-[#afbbc8]/40">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-            </div>
-          </div>
-        </div>
+        
 
         {/* Category Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
