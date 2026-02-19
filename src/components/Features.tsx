@@ -92,7 +92,7 @@ const calculatorCategories: CalculatorCategory[] = [
 ];
 
 const Features = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery] = useState('');
   const [expandedCategories, setExpandedCategories] = useState<Set<number>>(new Set());
 
   const toggleCategory = (index: number) => {
